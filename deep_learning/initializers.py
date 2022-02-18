@@ -1,14 +1,10 @@
 import numpy as np
 
 """
-He normal usually usef for ReLU
-https://stats.stackexchange.com/questions/319323/whats-the-difference-between-variance-scaling-initializer-and-xavier-initialize/319849#319849
-
-It draws samples from a truncated normal distribution centered on 0 with
-`stddev = sqrt(2 / fan_in)` where `fan_in` is the number of input units in the
-weight tensor.
+Xavier: Tanh, Sigmoid
+He: ReLU, Leaky ReLU
+Resources: 
 https://stackoverflow.com/questions/48641192/xavier-and-he-normal-initialization-difference
-
 https://machinelearningmastery.com/weight-initialization-for-deep-learning-neural-networks/
 
 """

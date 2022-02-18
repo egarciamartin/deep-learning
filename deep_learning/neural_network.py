@@ -21,8 +21,6 @@ class NeuralNetwork:
         """
         Forward pass
         Starting from the input layer, calculate the W matrices, bias 
-        Transposing it because Tensorflow uses: x: (m, n) but to do the matrix multipl
-        we need x.T
 
         Args
             x: input data. shape: (m, n)
