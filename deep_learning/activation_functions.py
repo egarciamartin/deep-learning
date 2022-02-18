@@ -25,16 +25,14 @@ class Softmax():
     def __call__(self, z):
         # e_x = np.exp(z - np.max(z))
         e_x = np.exp(z)
-        # return e_x / np.sum(e_x)
         return e_x / np.sum(e_x, axis=0)
 
-    def backward(self, a, z):
-        """
-        fx * (1 - fx)
-        Computed atm with the cross entropy
+    def backward(self, y, y_hat):
         """
 
-        return 0
+        Computed atm with the cross entropy
+        """
+        return (y_hat - y).T
 
 
 class ReLU():
@@ -87,5 +85,4 @@ class Sigmoid():
         """
         f(x)(1-f(x))
         """
-        # fx = self.__call__(x)
         return a * (1 - a)

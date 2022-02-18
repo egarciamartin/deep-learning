@@ -74,9 +74,12 @@ class NeuralNetwork:
          3. dw = delta * (incoming a to that layer, output of the previous layer in forward)
          4. dloss = delta * W.T   
 
+        Softmax: It's easier to calculate the dloss from the equation of the softmax 
+        together with the derivative of the cross entropy. 
+        So we do that at the same time. Exception for softmax
         """
         if self.layers[-1].activation.name == 'softmax':
-            dloss = (y_hat - y).T
+            dloss = self.layers[-1].activation.backward(y, y_hat)
         else:
             dloss = self.loss.backward(y, y_hat)
         for layer in reversed(self.layers[1:]):
