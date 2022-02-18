@@ -6,7 +6,7 @@ Work in progress. Implemented at the moment:
 - Deep Learning
     - MLP: Fully connected neural nets
 
-Kudos to @hedstroem for the big brain help.
+Kudos to https://github.com/hedstroem for the big brain help.
 
 
 ## Folder Structure
