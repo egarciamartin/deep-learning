@@ -1,6 +1,6 @@
 import numpy as np
 from deep_learning.activation_functions import LeakyReLU, ReLU, Tanh, Sigmoid, Softmax, Linear
-from deep_learning.initializers import he_normal, xavier_normal
+from deep_learning.initializers import HeNormal, XavierNormal, HeUniform, XavierUniform
 
 
 class Layers:
@@ -63,10 +63,11 @@ class Dense(Layers):
     a = f(z) where f is the activation function
     """
 
-    def __init__(self, neurons, activation) -> None:
+    def __init__(self, neurons, activation, initializer=None) -> None:
         super().__init__()
         self.neurons = neurons
         self.name = "Dense"
+        self.initializer = initializer
 
         # Activation function setup
         if activation == 'relu':
@@ -95,14 +96,13 @@ class Dense(Layers):
         input_shape: (n, m) it has been transposed
         """
         self.input_shape = input_shape
-        if self.activation.name in {"relu", 'leaky_relu', 'linear', 'softmax'}:
-            self.W = he_normal(self.neurons, input_shape[0])
-        elif self.activation.name in {"tanh", "sigmoid"}:
-            self.W = xavier_normal(self.neurons, input_shape[0])
-        else:
-            raise Exception(
-                f"Activation function {self.activation} not supported")
+        if self.initializer is None:
+            if self.activation.name in {"relu", 'leaky_relu', 'linear', 'softmax'}:
+                self.initializer = HeNormal()
+            else:
+                self.initializer = XavierNormal()
 
+        self.W = self.initializer(self.neurons, input_shape[0])
         self.b = np.zeros((self.neurons, 1))
 
     def forward(self, input):

@@ -33,7 +33,7 @@ class NeuralNetwork:
 
         return output.T
 
-    def fit(self, x, y, epochs):
+    def fit(self, x, y, epochs, verbose=1):
         """
         Imagine:
         Input, FC, FC, Output
@@ -48,8 +48,9 @@ class NeuralNetwork:
             y_hat = self.forward(x)
             l = self.loss.loss(y, y_hat)
             self.backprop(y, y_hat)
-            print(f'Epoch: {i+1} : {l}')
-        print(f"Loss after {epochs} epochs {l}")
+            if verbose >= 1:
+                print(f'Epoch: {i+1} : {l:.3f}')
+        print(f"Loss after {epochs} epochs {l:.3f}")
 
     def backprop(self, y, y_hat) -> None:
         """
